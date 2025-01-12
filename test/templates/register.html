@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/M_login_Regis.css') }}" rel="stylesheet">
+
+</head>
+<body>
+    <div class="box">
+
+                <form method="POST" action="/register" class="form">
+                    <h2 class="page-header text-primary text-center">Registration</h2>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" name="username" required>
+                        <span>Username</span>
+                        <i></i>
+                    </div>
+                    <div class="inputBox">
+                        <input type="password" class="form-control" id="password" name="passwords" required > 
+                        <a><img style="width: 25px;" src="static/img/hidden.png" onclick="pass()" class="pass-icon" id="pass-icon"></a>
+                        <span>Password</span>
+                        <i></i>
+                    </div>
+                     <div class="inputBox">
+                        <input class="form-control" name="email" required>
+                        <span>E-Mail</span>
+                        <i></i>
+                     </div>
+                    <div class="inputBox">
+                        <input type="text" class="form-control" name="contact" required>
+                        <span>Tels</span>
+                        <i></i>
+                    </div>
+
+                     <div class="links">
+                        <input type="submit" class="btn btn-success btn-block" value="Register">
+                         <a href="{{url_for('index')}}" class="btn btn-primary btn-block">Back to Home</a>
+                    </div>
+                </form>
+
+    </div>
+</body>
+</html>
+<script>
+    $(document).ready(function(){
+        $("form").attr("autocomplete","off");
+    });
+</script>
+<script src="static/script.js"></script>

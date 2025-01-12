@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ url_for('static',filename='css/M_team.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static',filename='css/M_table_gold.css') }}" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="static/mod.css">
+    <title>Check</title>
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="{{ url_for('customer') }}"><img src="static/img/Gold.png" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItem">
+                        <li><a href="{{ url_for('customer') }}">Home</a></li>
+                        <li><a href="{{ url_for('check') }}">Main</a></li>
+                        <li><a href="{{ url_for('team') }}">Team</a></li>
+                        <li><a href="{{url_for('register')}}">Register</a></li>
+                        <li><a href="{{url_for('logout')}}">Logout</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="row">
+                <div class="col-2">
+                    <h1>เว็บเช็คราคาทองคำแท่ง<br>ทองรูปพรรณ และค่าขายออก รับซื้อ</h1>
+                    <p>เว็บที่รวมรวมการซื้อขายทอง ขายออก รับซื้อ ฐานภาษีและกราฟ </p>
+                </div>
+                <div class="col-2">
+                    <img src="static/img/Goldimg1.jpg">
+                </div>
+            </div>
+        </div>
+    </div>
+<!--HEADER-->
+<!--INFO-->
+        <div class="row">
+            <div class="col-2">
+                <h2>Gold Thai</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Gold</th>
+                            <th>Sell</th>
+                            <th>Buy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for i in DATAGOLD %}
+                        <tr>
+                            <td>{{ i[2] }}</td>
+                            <td>{{ i[1] }}</td>
+                            <td>{{ i[3] }}</td>
+                            <td>{{ i[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                    {% for a in DATAGOLD2 %}
+                    <tr>
+                        <td>{{ a[2] }}</td>
+                        <td>{{ a[1] }}</td>
+                        <td>{{ a[3] }}</td>
+                        <td>{{ a[4] }}</td>
+                    </tr>
+                    {% endfor %}
+        
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-2">
+                <div class="container3">
+                    <div class="col-md-5">
+                        <canvas id="myChart" ></canvas>
+                        <script>
+                            const ctx = document.getElementById('myChart').getContext('2d');
+                            const myChart = new Chart(ctx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['ขายออก ทองแท่ง', 'รับซื้อ ทองแท่ง' , 'ขายออก ทองรูปพรรณ' , 'รับซื้อ ทองรูปพรรณ'],
+                                    datasets: [{
+                                        label: '# of Votes',
+                                        data: [{% for dt in chart_data %} {{dt}}, {% endfor %}],
+                                        backgroundColor: [
+                                            'rgba(255, 99, 132, 0.2)',
+                                            'rgba(54, 162, 235, 0.2)',
+                                            'rgba(255, 206, 86, 0.2)',
+                                            'rgba(75, 192, 192, 0.2)',
+                                        ],
+                                        borderColor: [
+                                            'rgba(255, 99, 132, 1)',
+                                            'rgba(54, 162, 235, 1)',
+                                            'rgba(255, 206, 86, 1)',
+                                            'rgba(75, 192, 192, 1)',
+                                        ],
+                                        borderWidth: 1
+                                    }]
+                                },
+                                options: {
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true
+                                        }
+                                    }
+                                }
+                            });
+                            </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+<!------footer------->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>ติดตั้งบนแอป Android และ IOS</p>
+                    <div class="app-logo">
+                        <a href="https://www.android.com/"><img src="static/img/play-store.png"></a>
+                        <a href="https://www.apple.com/ios/ios-15/"><img src="static/img/app-store.png"></a>
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <h3>" เว็บเช็คราคาทองโลกและรูปพรรณ "</h3>
+                </div>
+                <div class="footer-col-3">
+                    <h3>Links</h3>
+                    <ul class="link">
+                        <li><a href="https://kmutnb.ac.th/">KMUTNB</a></li>
+                        <li><a href="https://www.facebook.com/FITM.KMUTNB/">FITM</a></li>
+                        <li><a href="https://www.facebook.com/INEKMUTNB/">INE</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <li><a href="https://www.facebook.com/Joddna">Facbook</a></li>
+                        <li><a href="https://www.instagram.com/jod_jakapat/">Instagram</a></li>
+                        <li><a href="https://www.youtube.com/channel/UCcD6g_TOz5Z-ugJgROGhbYw">Youtube</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">Copyright 2022 - Team Jakapat</p>
+        </div>
+</div>
+</body>
+</html>
